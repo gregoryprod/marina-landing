@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Закупки из Китая — Марина Кананцева</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0C0A08;
+      --surface:   #131109;
+      --surface2:  #1A1710;
+      --cream:     #EDE4CF;
+      --cream-dim: #A89880;
+      --gold:      #C4873A;
+      --gold-lt:   #E2B86A;
+      --gold-dim:  rgba(196,135,58,.14);
+      --gold-line: rgba(196,135,58,.22);
+      --muted:     #5A5040;
+      --ff-disp:   'Cormorant', Georgia, serif;
+      --ff-ui:     'Syne', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--ff-ui);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: .4;
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1,h2,h3,h4 { font-family: var(--ff-disp); font-weight: 600; line-height: 1.1; }
+
+    .label {
+      font-family: var(--ff-ui);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ─── LAYOUT ─── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+    section { padding: 120px 0; }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-line) 30%, var(--gold-line) 70%, transparent);
+    }
+
+    /* ────────────────────────────────────
+       NAV
+    ──────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(180deg, rgba(12,10,8,.95) 0%, transparent 100%);
+      backdrop-filter: blur(0px);
+      transition: backdrop-filter .3s, background .3s;
+    }
+    nav.scrolled {
+      backdrop-filter: blur(20px);
+      background: rgba(12,10,8,.88);
+      border-bottom: 1px solid var(--gold-line);
+    }
+    .nav-brand {
+      font-family: var(--ff-disp);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: var(--cream);
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-cta {
+      font-family: var(--ff-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 10px 22px;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+    .nav-cta:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+    /* ────────────────────────────────────
+       HERO
+    ──────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Grid lines background */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--gold-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--gold-line) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+      opacity: .35;
+    }
+
+    /* Diagonal accent */
+    #hero::after {
+      content: '';
+      position: absolute;
+      right: -10%;
+      top: 10%;
+      width: 55%;
+      height: 80%;
+      background: radial-gradient(ellipse at 60% 40%, rgba(196,135,58,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1100px; margin: 0 auto; padding: 0 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-left {}
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 32px;
+      padding: 8px 16px;
+      border: 1px solid var(--gold-line);
+      background: var(--gold-dim);
+    }
+    .hero-tag span { font-size: 11px; color: var(--cream-dim); letter-spacing: .06em; }
+
+    .hero-h1 {
+      font-size: clamp(40px, 4.5vw, 64px);
+      font-weight: 600;
+      line-height: 1.06;
+      color: var(--cream);
+      margin-bottom: 28px;
+    }
+    .hero-h1 em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--cream-dim);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 440px;
+    }
+
+    .hero-author {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 40px;
+    }
+    .hero-author-line { width: 32px; height: 1px; background: var(--gold); }
+    .hero-author-text {
+      font-size: 12px;
+      color: var(--cream-dim);
+      letter-spacing: .04em;
+    }
+    .hero-author-text strong { color: var(--cream); font-weight: 600; }
+
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--ff-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 16px 32px;
+      transition: background .2s, transform .2s, box-shadow .2s;
+      position: relative;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--gold-lt);
+      transform: translate(4px, 4px);
+      transition: transform .2s;
+    }
+    .btn-primary:hover {
+      background: var(--gold-lt);
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--gold-dim);
+    }
+    .btn-primary:hover::after { transform: translate(6px, 6px); }
+
+    .hero-right {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--gold-line);
+      padding: 24px 28px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0; transform: translateX(40px);
+      transition: opacity .6s, transform .6s, background .2s;
+    }
+    .stat-card.visible { opacity: 1; transform: translateX(0); }
+    .stat-card:nth-child(2) { transition-delay: .1s; }
+    .stat-card:nth-child(3) { transition-delay: .2s; }
+    .stat-card::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--gold);
+    }
+    .stat-card:hover { background: var(--surface2); }
+    .stat-num {
+      font-family: var(--ff-disp);
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--gold-lt);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-desc {
+      font-size: 13px;
+      color: var(--cream-dim);
+      line-height: 1.5;
+    }
+    .stat-desc strong { color: var(--cream); font-weight: 600; }
+
+    /* ────────────────────────────────────
+       FOR WHOM
+    ──────────────────────────────────── */
+    #forwho { padding: 100px 0; }
+    .forwho-header { margin-bottom: 64px; }
+    .section-label { margin-bottom: 16px; }
+    .forwho-title {
+      font-size: clamp(36px, 3.5vw, 52px);
+      max-width: 600px;
+      margin-bottom: 16px;
+    }
+    .forwho-sub { font-size: 15px; color: var(--cream-dim); max-width: 540px; }
+
+    .forwho-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      border: 1px solid var(--gold-line);
+    }
+
+    .forwho-card {
+      background: var(--surface);
+      padding: 36px 36px 36px 44px;
+      position: relative;
+      transition: background .2s;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .5s, transform .5s, background .2s;
+    }
+    .forwho-card.visible { opacity: 1; transform: translateY(0); }
+    .forwho-card:nth-child(2) { transition-delay: .08s; }
+    .forwho-card:nth-child(3) { transition-delay: .16s; }
+    .forwho-card:nth-child(4) { transition-delay: .24s; }
+    .forwho-card::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--gold-line);
+      transition: background .2s;
+    }
+    .forwho-card:hover { background: var(--surface2); }
+    .forwho-card:hover::before { background: var(--gold); }
+
+    .forwho-role {
+      font-family: var(--ff-ui);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .forwho-problem {
+      font-size: 15px;
+      color: var(--cream-dim);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+    .forwho-gain {
+      font-size: 14px;
+      color: var(--cream);
+      font-weight: 500;
+    }
+    .forwho-gain::before {
+      content: '→ ';
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ────────────────────────────────────
+       CASES
+    ──────────────────────────────────── */
+    #cases {
+      background: var(--surface);
+      border-top: 1px solid var(--gold-line);
+      border-bottom: 1px solid var(--gold-line);
+    }
+
+    .cases-header { margin-bottom: 64px; }
+    .cases-title { font-size: clamp(36px, 3.5vw, 52px); }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .case-card {
+      padding: 36px;
+      border: 1px solid var(--gold-line);
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      transition: border-color .2s, transform .2s;
+      opacity: 0; transform: translateY(32px);
+    }
+    .case-card.visible { opacity: 1; transform: translateY(0); transition: opacity .6s, transform .6s, border-color .2s; }
+    .case-card:nth-child(2).visible { transition-delay: .12s; }
+    .case-card:nth-child(3).visible { transition-delay: .24s; }
+    .case-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+
+    .case-amount {
+      font-family: var(--ff-disp);
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--gold-lt);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .case-unit {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .case-text {
+      font-size: 14px;
+      color: var(--cream-dim);
+      line-height: 1.65;
+    }
+    .case-text strong { color: var(--cream); }
+
+    .cases-footnote {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--gold-line);
+      font-size: 14px;
+      color: var(--cream-dim);
+      font-style: italic;
+    }
+
+    /* ────────────────────────────────────
+       WHAT YOU GET
+    ──────────────────────────────────── */
+    #get {}
+
+    .get-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .get-sticky { position: sticky; top: 100px; }
+    .get-title { font-size: clamp(36px, 3.5vw, 52px); margin-bottom: 24px; }
+    .get-desc { font-size: 15px; color: var(--cream-dim); line-height: 1.7; margin-bottom: 32px; }
+
+    .get-list { display: flex; flex-direction: column; gap: 2px; }
+
+    .get-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0;
+      border: 1px solid var(--gold-line);
+      background: var(--surface);
+      overflow: hidden;
+      transition: background .2s;
+      opacity: 0; transform: translateX(24px);
+    }
+    .get-item.visible { opacity: 1; transform: translateX(0); transition: opacity .5s, transform .5s, background .2s; }
+    .get-item:nth-child(2).visible { transition-delay: .07s; }
+    .get-item:nth-child(3).visible { transition-delay: .14s; }
+    .get-item:nth-child(4).visible { transition-delay: .21s; }
+    .get-item:nth-child(5).visible { transition-delay: .28s; }
+    .get-item:nth-child(6).visible { transition-delay: .35s; }
+    .get-item:hover { background: var(--surface2); }
+
+    .get-num {
+      background: var(--gold-dim);
+      border-right: 1px solid var(--gold-line);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-disp);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .get-body { padding: 20px 24px; }
+    .get-body strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 4px;
+    }
+    .get-body p { font-size: 13px; color: var(--cream-dim); line-height: 1.55; }
+
+    /* ────────────────────────────────────
+       HOW IT WORKS
+    ──────────────────────────────────── */
+    #how {
+      background: var(--surface);
+      border-top: 1px solid var(--gold-line);
+      border-bottom: 1px solid var(--gold-line);
+    }
+
+    .how-title { font-size: clamp(36px, 3.5vw, 52px); margin-bottom: 64px; }
+
+    .steps { display: flex; flex-direction: column; gap: 0; }
+
+    .step {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      border-bottom: 1px solid var(--gold-line);
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .5s, transform .5s;
+    }
+    .step.visible { opacity: 1; transform: translateY(0); }
+    .step:nth-child(2).visible { transition-delay: .12s; }
+    .step:nth-child(3).visible { transition-delay: .24s; }
+    .step:last-child { border-bottom: none; }
+
+    .step-num-col {
+      padding: 40px 0;
+      display: flex; flex-direction: column;
+      align-items: center;
+      border-right: 1px solid var(--gold-line);
+    }
+    .step-n {
+      font-family: var(--ff-disp);
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .step-line {
+      flex: 1; width: 1px;
+      background: var(--gold-line);
+      margin-top: 16px;
+    }
+    .step:last-child .step-line { display: none; }
+
+    .step-body { padding: 40px 0 40px 48px; }
+    .step-title {
+      font-family: var(--ff-disp);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 14px;
+    }
+    .step-text { font-size: 15px; color: var(--cream-dim); line-height: 1.7; max-width: 580px; }
+    .step-text strong { color: var(--cream); }
+
+    /* ────────────────────────────────────
+       RESULT
+    ──────────────────────────────────── */
+    #result {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #result::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(196,135,58,.07) 0%, transparent 70%);
+    }
+    .result-inner { position: relative; z-index: 1; }
+    .result-tag { margin-bottom: 24px; }
+    .result-big {
+      font-family: var(--ff-disp);
+      font-size: clamp(56px, 8vw, 120px);
+      font-weight: 700;
+      color: var(--gold-lt);
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+    .result-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 40px;
+    }
+    .result-text {
+      font-size: 18px;
+      color: var(--cream-dim);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+    .result-text strong { color: var(--cream); }
+
+    /* ────────────────────────────────────
+       FAQ
+    ──────────────────────────────────── */
+    #faq {
+      background: var(--surface);
+      border-top: 1px solid var(--gold-line);
+    }
+
+    .faq-title { font-size: clamp(36px, 3.5vw, 52px); margin-bottom: 48px; }
+
+    .faq-list { display: flex; flex-direction: column; }
+
+    .faq-item {
+      border-bottom: 1px solid var(--gold-line);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+    .faq-item.visible { opacity: 1; }
+
+    .faq-q {
+      width: 100%;
+      background: none; border: none;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px;
+      padding: 28px 0;
+      cursor: pointer;
+      text-align: left;
+    }
+    .faq-q-text {
+      font-family: var(--ff-disp);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--cream);
+      transition: color .2s;
+    }
+    .faq-item:hover .faq-q-text { color: var(--gold-lt); }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border: 1px solid var(--gold-line);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+      font-size: 18px;
+      transition: transform .3s, background .2s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--gold-dim); }
+
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 28px; }
+    .faq-a p { font-size: 15px; color: var(--cream-dim); line-height: 1.75; max-width: 680px; }
+    .faq-a strong { color: var(--cream); }
+
+    /* ────────────────────────────────────
+       VS COMPARISON
+    ──────────────────────────────────── */
+    #vs {}
+
+    .vs-title { font-size: clamp(36px, 3.5vw, 52px); margin-bottom: 48px; }
+
+    .vs-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--gold-line);
+    }
+    .vs-table th, .vs-table td {
+      padding: 20px 24px;
+      text-align: left;
+      border-bottom: 1px solid var(--gold-line);
+      border-right: 1px solid var(--gold-line);
+      font-size: 14px;
+    }
+    .vs-table th:last-child, .vs-table td:last-child { border-right: none; }
+    .vs-table tr:last-child td { border-bottom: none; }
+
+    .vs-table thead th {
+      background: var(--surface2);
+      font-family: var(--ff-ui);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+    }
+    .vs-table thead th:first-child { color: transparent; }
+    .vs-table thead th.highlight { color: var(--gold); }
+
+    .vs-table tbody tr { background: var(--surface); transition: background .2s; }
+    .vs-table tbody tr:hover { background: var(--surface2); }
+    .vs-table tbody td { color: var(--cream-dim); }
+    .vs-table tbody td:first-child { color: var(--cream); font-weight: 500; }
+    .vs-table td.highlight { background: var(--gold-dim); color: var(--cream); font-weight: 500; }
+    .vs-check { color: var(--gold); font-weight: 700; }
+    .vs-cross { color: var(--muted); }
+
+    /* ────────────────────────────────────
+       CTA FOOTER
+    ──────────────────────────────────── */
+    #cta {
+      text-align: center;
+      padding: 140px 0;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    #cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--gold-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--gold-line) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, black 10%, transparent 100%);
+      opacity: .3;
+    }
+    .cta-inner { position: relative; z-index: 1; }
+    .cta-title {
+      font-size: clamp(40px, 5vw, 72px);
+      max-width: 720px;
+      margin: 0 auto 24px;
+      line-height: 1.05;
+    }
+    .cta-title em { font-style: italic; color: var(--gold-lt); }
+    .cta-sub {
+      font-size: 15px;
+      color: var(--cream-dim);
+      margin-bottom: 48px;
+      max-width: 480px;
+      margin-left: auto; margin-right: auto;
+    }
+    .cta-note {
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+
+    footer {
+      padding: 32px;
+      border-top: 1px solid var(--gold-line);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    /* ────────────────────────────────────
+       PROGRAM
+    ──────────────────────────────────── */
+    #program {
+      background: var(--surface);
+      border-top: 1px solid var(--gold-line);
+      border-bottom: 1px solid var(--gold-line);
+    }
+    .program-header { margin-bottom: 64px; }
+    .program-title { font-size: clamp(36px, 3.5vw, 52px); }
+    .program-sub { font-size: 15px; color: var(--cream-dim); max-width: 540px; margin-top: 16px; }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .week-card {
+      background: var(--bg);
+      border: 1px solid var(--gold-line);
+      padding: 40px;
+      position: relative;
+      transition: background .2s;
+      opacity: 0; transform: translateY(24px);
+    }
+    .week-card.visible { opacity: 1; transform: translateY(0); transition: opacity .5s, transform .5s, background .2s; }
+    .week-card:nth-child(2).visible { transition-delay: .08s; }
+    .week-card:nth-child(3).visible { transition-delay: .16s; }
+    .week-card:nth-child(4).visible { transition-delay: .24s; }
+    .week-card:hover { background: var(--surface2); }
+
+    .week-num {
+      font-family: var(--ff-ui);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .week-title {
+      font-family: var(--ff-disp);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+    .week-items {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .week-items li {
+      font-size: 13px;
+      color: var(--cream-dim);
+      line-height: 1.6;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--gold-line);
+    }
+    .week-items li:last-child { border-bottom: none; }
+    .week-result {
+      font-size: 13px;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: .02em;
+    }
+    .week-result::before { content: '→ '; }
+
+    @media (max-width: 900px) {
+      .program-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ────────────────────────────────────
+       PRICING
+    ──────────────────────────────────── */
+    #pricing { padding: 120px 0; }
+    .pricing-header { margin-bottom: 64px; }
+    .pricing-title { font-size: clamp(36px, 3.5vw, 52px); }
+    .pricing-sub { font-size: 15px; color: var(--cream-dim); max-width: 540px; margin-top: 16px; line-height: 1.7; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      align-items: start;
+    }
+
+    .price-card {
+      background: var(--surface);
+      border: 1px solid var(--gold-line);
+      padding: 40px;
+      position: relative;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .5s, transform .5s;
+    }
+    .price-card.visible { opacity: 1; transform: translateY(0); }
+    .price-card:nth-child(2).visible { transition-delay: .1s; }
+    .price-card:nth-child(3).visible { transition-delay: .2s; }
+    .price-card.featured {
+      background: var(--surface2);
+      border-color: var(--gold);
+    }
+    .price-badge {
+      display: inline-block;
+      font-family: var(--ff-ui);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 4px 10px;
+      margin-bottom: 24px;
+    }
+    .price-tier {
+      font-family: var(--ff-ui);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .price-name {
+      font-family: var(--ff-disp);
+      font-size: 30px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+    .price-desc {
+      font-size: 13px;
+      color: var(--cream-dim);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+    .price-amount {
+      font-family: var(--ff-disp);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--gold-lt);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .price-amount sup { font-size: 20px; vertical-align: super; }
+    .price-note { font-size: 12px; color: var(--muted); margin-bottom: 32px; }
+    .price-divider { height: 1px; background: var(--gold-line); margin-bottom: 28px; }
+    .price-features {
+      list-style: none;
+      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .price-features li {
+      font-size: 13px;
+      color: var(--cream-dim);
+      line-height: 1.5;
+      padding-left: 20px;
+      position: relative;
+    }
+    .price-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .price-features li.dim { color: var(--muted); }
+    .price-features li.dim::before { content: '—'; color: var(--muted); }
+    .price-cta {
+      display: block;
+      text-align: center;
+      font-family: var(--ff-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 24px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      transition: background .2s, color .2s;
+      cursor: pointer;
+    }
+    .price-cta:hover { background: var(--gold); color: var(--bg); }
+    .price-card.featured .price-cta { background: var(--gold); color: var(--bg); }
+    .price-card.featured .price-cta:hover { background: var(--gold-lt); }
+
+    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+    /* ────────────────────────────────────
+       QUIZ
+    ──────────────────────────────────── */
+    #quiz {
+      background: var(--surface);
+      border-top: 1px solid var(--gold-line);
+      border-bottom: 1px solid var(--gold-line);
+      padding: 120px 0;
+    }
+    .quiz-header { margin-bottom: 48px; }
+    .quiz-title { font-size: clamp(32px, 3vw, 48px); margin-bottom: 16px; }
+    .quiz-sub { font-size: 15px; color: var(--cream-dim); max-width: 540px; line-height: 1.7; }
+
+    .quiz-box {
+      max-width: 660px;
+      margin: 0 auto;
+      background: var(--bg);
+      border: 1px solid var(--gold-line);
+      padding: 48px;
+    }
+    .quiz-progress { display: flex; gap: 6px; margin-bottom: 40px; }
+    .quiz-bar {
+      flex: 1; height: 2px;
+      background: var(--gold-line);
+      transition: background .3s;
+    }
+    .quiz-bar.done { background: var(--gold); }
+
+    .quiz-step { display: none; }
+    .quiz-step.active { display: block; }
+
+    .quiz-step-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .quiz-q {
+      font-family: var(--ff-disp);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 28px;
+      line-height: 1.2;
+    }
+    .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border: 1px solid var(--gold-line);
+      background: var(--surface);
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+      user-select: none;
+    }
+    .quiz-option:hover { border-color: var(--gold); background: var(--surface2); }
+    .quiz-option.selected { border-color: var(--gold); background: var(--gold-dim); }
+    .quiz-dot {
+      width: 14px; height: 14px;
+      border: 2px solid var(--gold-line);
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: border-color .2s, background .2s;
+    }
+    .quiz-option.selected .quiz-dot { border-color: var(--gold); background: var(--gold); }
+    .quiz-option-text { font-size: 14px; color: var(--cream-dim); transition: color .2s; }
+    .quiz-option.selected .quiz-option-text { color: var(--cream); }
+
+    .quiz-nav { margin-top: 28px; display: flex; justify-content: flex-end; }
+    .quiz-next {
+      font-family: var(--ff-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      border: none;
+      padding: 13px 28px;
+      cursor: pointer;
+      transition: background .2s;
+      opacity: .4;
+      pointer-events: none;
+    }
+    .quiz-next.enabled { opacity: 1; pointer-events: auto; }
+    .quiz-next.enabled:hover { background: var(--gold-lt); }
+
+    .quiz-form { display: flex; flex-direction: column; gap: 12px; }
+    .quiz-input {
+      font-family: var(--ff-ui);
+      font-size: 14px;
+      background: var(--surface);
+      border: 1px solid var(--gold-line);
+      color: var(--cream);
+      padding: 14px 18px;
+      outline: none;
+      transition: border-color .2s;
+      width: 100%;
+    }
+    .quiz-input::placeholder { color: var(--muted); }
+    .quiz-input:focus { border-color: var(--gold); }
+    .quiz-submit {
+      font-family: var(--ff-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      border: none;
+      padding: 16px 32px;
+      cursor: pointer;
+      transition: background .2s;
+      width: 100%;
+      margin-top: 4px;
+    }
+    .quiz-submit:hover { background: var(--gold-lt); }
+
+    .quiz-success { display: none; text-align: center; padding: 12px 0; }
+    .quiz-success h3 { font-family: var(--ff-disp); font-size: 32px; color: var(--cream); margin-bottom: 14px; }
+    .quiz-success p { font-size: 15px; color: var(--cream-dim); line-height: 1.7; }
+
+    @media (max-width: 900px) { .quiz-box { padding: 32px 24px; } }
+
+    /* ────────────────────────────────────
+       ANIMATIONS — ENTRANCE
+    ──────────────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .7s, transform .7s;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ────────────────────────────────────
+       RESPONSIVE
+    ──────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-inner, .get-layout { grid-template-columns: 1fr; gap: 48px; }
+      .forwho-grid { grid-template-columns: 1fr; }
+      .cases-grid { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .get-sticky { position: static; }
+      nav { padding: 16px 20px; }
+      .container { padding: 0 20px; }
+      section { padding: 80px 0; }
+      .vs-table { font-size: 12px; }
+      .vs-table th, .vs-table td { padding: 14px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-brand" href="#">Бизнес<span>Китай</span></a>
+  <a class="nav-cta" href="#cta">Записаться на разбор</a>
+</nav>
+
+<!-- ═══════════════════════════════════
+     HERO
+═══════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">
+        <span class="label">Курс</span>
+        <span>Дизайнеры · Строители · Прорабы · Частные заказчики</span>
+      </div>
+
+      <h1 class="hero-h1">
+        Закупай из Китая напрямую —<br>
+        <em>зарабатывай на разнице</em><br>
+        или экономь до 60%
+      </h1>
+
+      <p class="hero-sub">
+        Мебель, свет, сантехника, декор, отделка — напрямую с фабрик без посредников.
+        На среднем проекте это сотни тысяч рублей, которые сейчас уходят не тебе.
+      </p>
+
+      <div class="hero-author">
+        <div class="hero-author-line"></div>
+        <p class="hero-author-text">
+          <strong>Марина Кананцева</strong> — 20 лет в бизнесе с Китаем,
+          оборот 150+ млн ₽, член ОПОРА России
+        </p>
+      </div>
+
+      <a href="#cta" class="btn-primary">Посмотреть, сколько ты теряешь</a>
+    </div>
+
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-num">470 000 ₽</div>
+        <p class="stat-desc"><strong>Дизайнер-ученица</strong> — заработок на комплектации с одного объекта. Только на поставке, без учёта гонорара за проект</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">422 000 ₽</div>
+        <p class="stat-desc"><strong>Барбершоп</strong> — сэкономил на оборудовании, купив напрямую то, что в России стоит втрое дороже</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">7–9 млн</div>
+        <p class="stat-desc"><strong>Подрядчик</strong> — вышел на контракты с нефтяной компанией, потому что умел закупать сам без посредников</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════
+     FOR WHOM
+═══════════════════════════════════ -->
+<section id="forwho">
+  <div class="container">
+    <div class="forwho-header fade-up">
+      <div class="section-label label">Для кого</div>
+      <h2 class="forwho-title">Если ты участвуешь в закупках — ты уже зарабатываешь для кого-то другого</h2>
+      <p class="forwho-sub">Посредники, магазины и агрегаторы забирают 40–60% от стоимости каждой позиции. Этот навык возвращает деньги тебе.</p>
+    </div>
+
+    <div class="forwho-grid">
+      <div class="forwho-card">
+        <div class="forwho-role">Дизайнер интерьера</div>
+        <p class="forwho-problem">Подбираешь позиции, сопровождаешь клиента — но маржа на комплектации уходит магазинам. Ты делаешь основную работу, а деньги получает посредник.</p>
+        <p class="forwho-gain">С прямыми поставками эта маржа — твоя</p>
+      </div>
+      <div class="forwho-card">
+        <div class="forwho-role">Строитель / прораб</div>
+        <p class="forwho-problem">Сам находишь материалы и мебель, сам договариваешься — но платишь розничную цену. Разница между фабрикой и магазином 40–60%, и она не у тебя.</p>
+        <p class="forwho-gain">Прямой заход меняет экономику каждого объекта</p>
+      </div>
+      <div class="forwho-card">
+        <div class="forwho-role">Подрядчик ремонта под ключ</div>
+        <p class="forwho-problem">Берёшь на себя все закупки — а разница оседает у поставщиков. Больше работы, та же прибыль. Масштабироваться без выгорания становится невозможно.</p>
+        <p class="forwho-gain">Каждый следующий объект приносит больше</p>
+      </div>
+      <div class="forwho-card">
+        <div class="forwho-role">Частный заказчик</div>
+        <p class="forwho-problem">Делаешь ремонт для себя и понимаешь, что 30–60% бюджета — это наценки магазинов и дизайнеров. Те же фабрики, та же мебель — просто другая цена.</p>
+        <p class="forwho-gain">40–60% от бюджета на комплектацию — остаются тебе</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════
+     CASES
+═══════════════════════════════════ -->
+<section id="cases">
+  <div class="container">
+    <div class="cases-header fade-up">
+      <div class="section-label label">Реальные цифры</div>
+      <h2 class="cases-title">Это не теория — это то, что происходит после первой разобранной механики</h2>
+    </div>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-amount">470 000</div>
+        <div class="case-unit">₽ — заработок на одном объекте</div>
+        <p class="case-text">Дизайнер из учениц Марины — <strong>только на поставке мебели и текстиля</strong>, без учёта гонорара за проектирование. Один объект. Один навык.</p>
+      </div>
+      <div class="case-card">
+        <div class="case-amount">7–9 млн</div>
+        <div class="case-unit">₽ — объём контракта с нефтяной компанией</div>
+        <p class="case-text">Подрядчик, освоивший прямые поставки, смог конкурировать за крупные объекты <strong>именно потому, что умел закупать без посредников</strong> — дешевле всех остальных.</p>
+      </div>
+      <div class="case-card">
+        <div class="case-amount">422 000</div>
+        <div class="case-unit">₽ — экономия на оборудовании</div>
+        <p class="case-text">Барбершоп купил напрямую <strong>то, что в России стоит втрое дороже</strong>. Закупка сделана одним человеком без логиста, без агента и без знания китайского.</p>
+      </div>
+    </div>
+    <p class="cases-footnote">Окупаемость обучения — с первой же сделки. Разница на одном заказе перекрывает стоимость курса.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     WHAT YOU GET
+═══════════════════════════════════ -->
+<section id="get">
+  <div class="container">
+    <div class="get-layout">
+      <div class="get-sticky">
+        <div class="section-label label" style="margin-bottom:16px">Что ты получишь</div>
+        <h2 class="get-title">Всё, что нужно для первой сделки и каждой следующей</h2>
+        <p class="get-desc">База, схемы, скрипты и живая практика — не теория, а инструменты, которые работают на первом же проекте.</p>
+        <a href="#cta" class="btn-primary" style="margin-top:8px">Записаться на курс</a>
+      </div>
+      <div class="get-list">
+        <div class="get-item">
+          <div class="get-num">01</div>
+          <div class="get-body">
+            <strong>Закрытая база 500+ поставщиков</strong>
+            <p>Отобраны лично в Китае: мебель, свет, сантехника, декор, отделка — всё с контактами, минимальными заказами и актуальными ценами.</p>
+          </div>
+        </div>
+        <div class="get-item">
+          <div class="get-num">02</div>
+          <div class="get-body">
+            <strong>Схема закупки без своих денег</strong>
+            <p>Клиент платит тебе предоплату — ты размещаешь заказ. Твои деньги не участвуют ни на одном этапе.</p>
+          </div>
+        </div>
+        <div class="get-item">
+          <div class="get-num">03</div>
+          <div class="get-body">
+            <strong>Навык работы с 1688 и Taobao</strong>
+            <p>Заходишь в приложение, находишь фабрику, пишешь в чате, договариваешься. Китайский язык не нужен.</p>
+          </div>
+        </div>
+        <div class="get-item">
+          <div class="get-num">04</div>
+          <div class="get-body">
+            <strong>Система проверки поставщика</strong>
+            <p>Как читать рейтинг, как запросить фото до отправки, как зафиксировать условия — и что делать, если пришёл брак.</p>
+          </div>
+        </div>
+        <div class="get-item">
+          <div class="get-num">05</div>
+          <div class="get-body">
+            <strong>Готовые скрипты под клиента</strong>
+            <p>Как объяснить заказчику логистику, сроки и качество так, чтобы он не ушёл к другому.</p>
+          </div>
+        </div>
+        <div class="get-item">
+          <div class="get-num">06</div>
+          <div class="get-body">
+            <strong>Интерьерный тур в Китай</strong>
+            <p>Едем на фабрики вместе — смотрим производства, выстраиваем связи напрямую. Для тех, кто хочет выйти на следующий уровень.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PROGRAM
+═══════════════════════════════════ -->
+<section id="program">
+  <div class="container">
+    <div class="program-header fade-up">
+      <div class="section-label label">Программа</div>
+      <h2 class="program-title">4 недели — от нуля до первой сделки</h2>
+      <p class="program-sub">Каждая неделя заканчивается конкретным результатом, а не знаниями в блокноте.</p>
+    </div>
+    <div class="program-grid">
+      <div class="week-card">
+        <div class="week-num">Неделя 1</div>
+        <div class="week-title">Платформы и поставщики</div>
+        <ul class="week-items">
+          <li>Как устроены 1688 и Taobao — интерфейс, поиск, фильтры</li>
+          <li>Как читать карточку поставщика: рейтинг, история, отзывы</li>
+          <li>Как запросить фото и видео товара до отправки</li>
+          <li>Как зафиксировать условия так, чтобы у продавца была ответственность</li>
+        </ul>
+        <div class="week-result">Нашли 3 поставщика под реальную позицию из своего проекта</div>
+      </div>
+      <div class="week-card">
+        <div class="week-num">Неделя 2</div>
+        <div class="week-title">Переговоры и оплата</div>
+        <ul class="week-items">
+          <li>Как писать поставщику без знания китайского</li>
+          <li>Как договориться об условиях и цене</li>
+          <li>Alipay и оплата через посредника — конкретная механика</li>
+          <li>Как проверить товар перед отправкой</li>
+        </ul>
+        <div class="week-result">Договорились с поставщиком, подтвердили заказ</div>
+      </div>
+      <div class="week-card">
+        <div class="week-num">Неделя 3</div>
+        <div class="week-title">Логистика</div>
+        <ul class="week-items">
+          <li>Карго: как выбрать и рассчитать стоимость доставки</li>
+          <li>Сроки по категориям — что приходит за 2–3 недели, что требует цикла</li>
+          <li>Как закладывать Китай в план проекта, чтобы объект не стоял</li>
+          <li>Что делать если пришёл брак</li>
+        </ul>
+        <div class="week-result">Заказ отправлен</div>
+      </div>
+      <div class="week-card">
+        <div class="week-num">Неделя 4</div>
+        <div class="week-title">Деньги и клиент</div>
+        <ul class="week-items">
+          <li>Как считать маржу и закладывать её в проект</li>
+          <li>Скрипт разговора с клиентом про Китай</li>
+          <li>Как презентовать: «вот цена в шоуруме, вот с фабрики, разницу — на свет»</li>
+          <li>Как масштабировать на следующие объекты</li>
+        </ul>
+        <div class="week-result">Первая сделка закрыта. Считаем реальную маржу</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════
+     HOW IT WORKS
+═══════════════════════════════════ -->
+<section id="how">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label label" style="margin-bottom:16px">Как это работает</div>
+      <h2 class="how-title">Три шага от нуля до первых денег</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num-col">
+          <span class="step-n">1</span>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Найти позицию и заработать на разнице</div>
+          <p class="step-text">Та люстра, которую клиент смотрит в шоуруме за 85 000 ₽ — на 1688 стоит <strong>8 000–14 000 ₽</strong>. Та же фабрика, тот же материал. Для профессионала это дополнительный доход с проекта, для частного заказчика — реальная экономия бюджета.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num-col">
+          <span class="step-n">2</span>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Проверить поставщика и разместить заказ</div>
+          <p class="step-text">Без языка, без посредника, без риска нарваться на брак. Разберём, как читать карточку поставщика, как фиксировать условия сделки и как организовать доставку через карго. <strong>После первой сделки это занимает столько же, сколько обычная переписка.</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num-col">
+          <span class="step-n">3</span>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Получить деньги — до того, как что-то купишь</div>
+          <p class="step-text">Клиент платит тебе предоплату. Ты закупаешь на его деньги. Забираешь разницу между закупочной и рыночной ценой. <strong>Твой капитал не заморожен ни на один день.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     RESULT
+═══════════════════════════════════ -->
+<section id="result">
+  <div class="container result-inner fade-up">
+    <div class="result-tag label">Результат</div>
+    <div class="result-big">100 000–300 000 ₽</div>
+    <div class="result-label">дополнительно с каждого среднего проекта</div>
+    <p class="result-text">
+      Это деньги, которые ты уже сейчас фактически зарабатываешь —
+      <strong>только не для себя</strong>, а для магазинов, агрегаторов и посредников.
+      Окупаемость курса — с первой же сделки.
+    </p>
+    <a href="#cta" class="btn-primary">Начать зарабатывать на закупках</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════
+     FAQ
+═══════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label label" style="margin-bottom:16px">Вопросы</div>
+      <h2 class="faq-title">Разбираем сомнения</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">Нужно знать китайский язык?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Нет. Платформы переводятся встроенными переводчиками, переписка с поставщиком — через переводчик за 2 минуты. После первой сделки вопрос «как с ними общаться» исчезает полностью. <strong>Большинство людей переоценивают эту сложность.</strong></p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">А если приедет брак или не тот товар?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Это снимается конкретным знанием, а не везением. На курсе разберём, как читать рейтинг поставщика на 1688, как запросить фото и видео до отправки, как зафиксировать условия сделки так, чтобы у продавца была ответственность. <strong>Марина работает с Китаем 20 лет — в базе только проверенные лично фабрики.</strong></p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">Клиент не согласится покупать через Китай</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Согласится. Потому что ты приходишь не с идеей «давайте попробуем», а с конкретным предложением: «Эта позиция в шоуруме стоит 95 000 ₽. Вот точно такая же с той же фабрики — 26 000 ₽. Разницу направляем на свет». Клиент видит не авантюру — <strong>он видит специалиста, который умеет управлять его бюджетом</strong>. Это другой уровень доверия и другой чек.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PRICING
+═══════════════════════════════════ -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-header fade-up">
+      <div class="section-label label">Тарифы</div>
+      <h2 class="pricing-title">Выбери формат под свою задачу</h2>
+      <p class="pricing-sub">Все тарифы включают 4-недельную программу и закрытую базу поставщиков. Отличие — в уровне сопровождения.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- Базовый -->
+      <div class="price-card">
+        <div class="price-tier">Базовый</div>
+        <div class="price-name">Самостоятельно</div>
+        <p class="price-desc">Для тех, кто хочет разобраться в своём темпе и уже умеет работать с новыми инструментами.</p>
+        <div class="price-amount">29 000 <sup>₽</sup></div>
+        <p class="price-note">разовый платёж</p>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Полная 4-недельная программа</li>
+          <li>Закрытая база 500+ поставщиков</li>
+          <li>Скрипты переговоров с поставщиком</li>
+          <li>Скрипт диалога с клиентом</li>
+          <li class="dim">Куратор и обратная связь</li>
+          <li class="dim">Сопровождение первой сделки</li>
+          <li class="dim">Личные консультации с Мариной</li>
+        </ul>
+        <a href="#quiz" class="price-cta">Выбрать тариф</a>
+      </div>
+
+      <!-- С куратором -->
+      <div class="price-card featured">
+        <div class="price-badge">Популярный выбор</div>
+        <div class="price-tier">Основной</div>
+        <div class="price-name">С куратором</div>
+        <p class="price-desc">Программа плюс живое сопровождение: куратор помогает на каждом этапе и выводит на первую сделку.</p>
+        <div class="price-amount">49 000 <sup>₽</sup></div>
+        <p class="price-note">разовый платёж</p>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Полная 4-недельная программа</li>
+          <li>Закрытая база 500+ поставщиков</li>
+          <li>Скрипты переговоров с поставщиком</li>
+          <li>Скрипт диалога с клиентом</li>
+          <li>Куратор и обратная связь на всём пути</li>
+          <li>Сопровождение первой реальной сделки</li>
+          <li class="dim">Личные консультации с Мариной</li>
+        </ul>
+        <a href="#quiz" class="price-cta">Выбрать тариф</a>
+      </div>
+
+      <!-- VIP -->
+      <div class="price-card">
+        <div class="price-tier">VIP</div>
+        <div class="price-name">Личная работа</div>
+        <p class="price-desc">Максимальный формат: личные сессии с Мариной, индивидуальный разбор проектов и приоритет на тур в Китай.</p>
+        <div class="price-amount">89 000 <sup>₽</sup></div>
+        <p class="price-note">разовый платёж</p>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Полная 4-недельная программа</li>
+          <li>Закрытая база 500+ поставщиков</li>
+          <li>Скрипты переговоров с поставщиком</li>
+          <li>Скрипт диалога с клиентом</li>
+          <li>Куратор и обратная связь на всём пути</li>
+          <li>Сопровождение первой реальной сделки</li>
+          <li>3 личных консультации с Мариной</li>
+          <li>Приоритетное место в интерьерном туре в Китай</li>
+        </ul>
+        <a href="#quiz" class="price-cta">Выбрать тариф</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     QUIZ
+═══════════════════════════════════ -->
+<section id="quiz">
+  <div class="container">
+    <div class="quiz-header fade-up">
+      <div class="section-label label">Бесплатный разбор</div>
+      <h2 class="quiz-title">Разберём, сколько ты теряешь на своих проектах</h2>
+      <p class="quiz-sub">3 вопроса — и Марина покажет конкретные цифры под твой тип работы.</p>
+    </div>
+
+    <div class="quiz-box fade-up">
+      <div class="quiz-progress">
+        <div class="quiz-bar done" id="qbar1"></div>
+        <div class="quiz-bar" id="qbar2"></div>
+        <div class="quiz-bar" id="qbar3"></div>
+        <div class="quiz-bar" id="qbar4"></div>
+      </div>
+
+      <!-- Шаг 1 -->
+      <div class="quiz-step active" id="step1">
+        <div class="quiz-step-label">Шаг 1 из 3</div>
+        <div class="quiz-q">Кто ты по профессии?</div>
+        <div class="quiz-options">
+          <label class="quiz-option"><span class="quiz-dot"></span><span class="quiz-option-text">Дизайнер интерьера или комплектатор</span></label>
+          <label class="quiz-option"><span class="quiz-dot"></span><span class="quiz-option-text">Строитель или прораб</span></label>
+          <label class="quiz-option"><span class="quiz-dot"></span><span class="quiz-option-text">Подрядчик ремонта под ключ</span></label>
+          <label class="quiz-option"><span class="quiz-dot"></span><span class="quiz-option-text">Флиппер или частный заказчик</span></label>
+        </div>
+        <div class="quiz-nav"><button class="quiz-next" id="next1">Далее →</button></div>
+      </div>
+
+      <!-- Шаг 2 -->
+      <div class="quiz-step" id="step2">
+        <div class="quiz-step-label">Шаг 2 из 3</div>
+        <div class="quiz-q">Ты участвуешь в подборе или закупках материалов?</div>
+        <div class="quiz-options">
+          <label class="quiz-option"><span class="quiz-dot"></span><span class="quiz-option-text">Да, постоянно — это часть моей работы</span></label>
+          <label class="quiz-option"><span class="quiz-dot"></span><span class="quiz-option-text">Иногда — по запросу клиента</span></label>
+          <label class="quiz-option"><span class="quiz-dot"></span><span class="quiz-option-text">Пока нет, но хочу добавить это в свою работу</span></label>
+        </div>
+        <div class="quiz-nav"><button class="quiz-next" id="next2">Далее →</button></div>
+      </div>
+
+      <!-- Шаг 3 -->
+      <div class="quiz-step" id="step3">
+        <div class="quiz-step-label">Шаг 3 из 3</div>
+        <div class="quiz-q">Сколько объектов ты ведёшь в месяц?</div>
+        <div class="quiz-options">
+          <label class="quiz-option"><span class="quiz-dot"></span><span class="quiz-option-text">1–2 объекта</span></label>
+          <label class="quiz-option"><span class="quiz-dot"></span><span class="quiz-option-text">3–5 объектов</span></label>
+          <label class="quiz-option"><span class="quiz-dot"></span><span class="quiz-option-text">6 и более</span></label>
+        </div>
+        <div class="quiz-nav"><button class="quiz-next" id="next3">Далее →</button></div>
+      </div>
+
+      <!-- Шаг 4 — форма -->
+      <div class="quiz-step" id="step4">
+        <div class="quiz-step-label">Последний шаг</div>
+        <div class="quiz-q">Куда отправить результат разбора?</div>
+        <form class="quiz-form" id="quizForm">
+          <input class="quiz-input" type="text" name="name" placeholder="Имя" required />
+          <input class="quiz-input" type="text" name="contact" placeholder="Telegram или телефон" required />
+          <button class="quiz-submit" type="submit">Получить бесплатный разбор</button>
+        </form>
+      </div>
+
+      <!-- Успех -->
+      <div class="quiz-success" id="quizSuccess">
+        <h3>Заявка принята</h3>
+        <p>Марина свяжется с тобой в ближайшее время<br>и проведёт разбор под твои конкретные проекты.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════
+     VS COMPARISON
+═══════════════════════════════════ -->
+<section id="vs">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label label" style="margin-bottom:16px">Сравнение</div>
+      <h2 class="vs-title">Почему не самостоятельно и не через посредника</h2>
+    </div>
+    <table class="vs-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="highlight">Курс Марины</th>
+          <th>YouTube / самообучение</th>
+          <th>Агрегаторы / посредники</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Первая рабочая сделка</td>
+          <td class="highlight"><span class="vs-check">4 недели</span></td>
+          <td>6–12 месяцев</td>
+          <td>Не нужно — но вся маржа уходит им</td>
+        </tr>
+        <tr>
+          <td>База проверенных поставщиков</td>
+          <td class="highlight"><span class="vs-check">500+ контактов</span></td>
+          <td><span class="vs-cross">Нет</span></td>
+          <td><span class="vs-cross">Закрыта — это их бизнес</span></td>
+        </tr>
+        <tr>
+          <td>Маржа на закупках</td>
+          <td class="highlight"><span class="vs-check">100% твоя</span></td>
+          <td>Твоя — если разберёшься</td>
+          <td><span class="vs-cross">Уходит посреднику</span></td>
+        </tr>
+        <tr>
+          <td>Куратор и обратная связь</td>
+          <td class="highlight"><span class="vs-check">Есть</span></td>
+          <td><span class="vs-cross">Нет</span></td>
+          <td><span class="vs-cross">Нет</span></td>
+        </tr>
+        <tr>
+          <td>Зависимость от чужих условий</td>
+          <td class="highlight"><span class="vs-check">Нет</span></td>
+          <td>Нет</td>
+          <td><span class="vs-cross">Полная</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CTA
+═══════════════════════════════════ -->
+<section id="cta">
+  <div class="container cta-inner fade-up">
+    <div class="section-label label" style="margin-bottom:24px">Начать</div>
+    <h2 class="cta-title">Разберём, сколько ты теряешь<br>на <em>текущих проектах</em></h2>
+    <p class="cta-sub">Бесплатный разбор: посмотрим на цифры твоего типа объектов и покажем, где появляется дополнительный доход.</p>
+    <a href="#" class="btn-primary">Записаться на бесплатный разбор</a>
+    <p class="cta-note">Марина Кананцева · 20 лет в бизнесе с Китаем · Член ОПОРА России</p>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Марина Кананцева. Все права защищены.</span>
+  <a href="#">Политика конфиденциальности</a>
+</footer>
+
+<script>
+  // NAV scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Intersection Observer for entrance animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll(
+    '.stat-card, .forwho-card, .case-card, .get-item, .week-card, .price-card, .step, .faq-item, .fade-up'
+  ).forEach(el => observer.observe(el));
+
+  // QUIZ
+  (function() {
+    function initStep(stepId, nextBtnId, barId) {
+      const step = document.getElementById(stepId);
+      const nextBtn = document.getElementById(nextBtnId);
+      if (!step || !nextBtn) return;
+      const options = step.querySelectorAll('.quiz-option');
+      options.forEach(opt => {
+        opt.addEventListener('click', () => {
+          options.forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          nextBtn.classList.add('enabled');
+        });
+      });
+      nextBtn.addEventListener('click', () => {
+        if (!nextBtn.classList.contains('enabled')) return;
+        document.getElementById(barId).classList.add('done');
+        step.classList.remove('active');
+        const nextStep = step.nextElementSibling;
+        if (nextStep && nextStep.classList.contains('quiz-step')) {
+          nextStep.classList.add('active');
+        }
+      });
+    }
+    initStep('step1', 'next1', 'qbar2');
+    initStep('step2', 'next2', 'qbar3');
+    initStep('step3', 'next3', 'qbar4');
+
+    const form = document.getElementById('quizForm');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        document.getElementById('step4').classList.remove('active');
+        document.getElementById('quizSuccess').style.display = 'block';
+      });
+    }
+  })();
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Hero stat cards — staggered entrance on load
+  setTimeout(() => {
+    document.querySelectorAll('.stat-card').forEach((c, i) => {
+      setTimeout(() => c.classList.add('visible'), 300 + i * 120);
+    });
+  }, 200);
+</script>
+</body>
+</html>
