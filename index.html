@@ -228,42 +228,65 @@
     .btn-primary:hover::after { transform: translate(6px, 6px); }
 
     .hero-right {
-      display: flex; flex-direction: column; gap: 16px;
+      display: flex;
+      justify-content: flex-end;
     }
 
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--gold-line);
-      padding: 24px 28px;
+    .hero-portrait-wrap {
       position: relative;
-      overflow: hidden;
-      opacity: 0; transform: translateX(40px);
-      transition: opacity .6s, transform .6s, background .2s;
+      width: min(100%, 420px);
+      margin-left: auto;
+      opacity: 0;
+      transform: translateX(32px);
+      transition: opacity .7s, transform .7s;
     }
-    .stat-card.visible { opacity: 1; transform: translateX(0); }
-    .stat-card:nth-child(2) { transition-delay: .1s; }
-    .stat-card:nth-child(3) { transition-delay: .2s; }
-    .stat-card::before {
+    .hero-portrait-wrap.visible { opacity: 1; transform: translateX(0); }
+    .hero-portrait-wrap::before {
       content: '';
       position: absolute; left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: var(--gold);
+      right: 0;
+      border: 1px solid var(--gold-line);
+      transform: translate(14px, 14px);
+      z-index: 0;
     }
-    .stat-card:hover { background: var(--surface2); }
-    .stat-num {
-      font-family: var(--ff-disp);
-      font-size: 44px;
+    .hero-portrait {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      border: 1px solid var(--gold-line);
+      background: var(--surface);
+      filter: grayscale(6%);
+    }
+    .hero-portrait-note {
+      position: absolute;
+      left: -24px;
+      bottom: 28px;
+      z-index: 2;
+      background: rgba(8,14,26,.94);
+      border: 1px solid var(--gold-line);
+      padding: 16px 18px;
+      min-width: 220px;
+      backdrop-filter: blur(10px);
+    }
+    .hero-portrait-note strong {
+      display: block;
+      font-size: 12px;
       font-weight: 700;
-      color: var(--gold-lt);
-      line-height: 1;
-      margin-bottom: 4px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
     }
-    .stat-desc {
-      font-size: 13px;
-      color: var(--cream-dim);
+    .hero-portrait-note span {
+      display: block;
+      font-size: 14px;
       line-height: 1.5;
+      color: var(--cream);
     }
-    .stat-desc strong { color: var(--cream); font-weight: 600; }
 
     /* ────────────────────────────────────
        VSL
@@ -1082,12 +1105,12 @@
     }
     .program-header { margin-bottom: 64px; }
     .program-title { font-size: clamp(36px, 3.5vw, 52px); }
-    .program-sub { font-size: 15px; color: var(--cream-dim); max-width: 540px; margin-top: 16px; }
+    .program-sub { font-size: 15px; color: var(--cream-dim); max-width: 760px; margin-top: 16px; line-height: 1.7; }
 
     .program-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
+      grid-template-columns: 1fr;
+      gap: 24px;
     }
 
     .week-card {
@@ -1121,18 +1144,81 @@
       margin-bottom: 20px;
       line-height: 1.15;
     }
-    .week-items {
-      list-style: none;
+    .week-goal {
+      font-size: 14px;
+      color: var(--cream-dim);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 780px;
+    }
+    .week-goal strong { color: var(--cream); }
+
+    .week-modules {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
       margin-bottom: 24px;
     }
-    .week-items li {
+    .week-module {
+      border: 1px solid var(--gold-line);
+      background: var(--surface);
+      padding: 24px;
+    }
+    .week-module-name {
+      font-family: var(--ff-ui);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .week-module-title {
+      font-family: var(--ff-disp);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .week-lessons,
+    .week-practice-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .week-lessons li,
+    .week-practice-list li {
       font-size: 13px;
       color: var(--cream-dim);
       line-height: 1.6;
-      padding: 7px 0;
-      border-bottom: 1px solid var(--gold-line);
+      padding-left: 16px;
+      position: relative;
     }
-    .week-items li:last-child { border-bottom: none; }
+    .week-lessons li::before,
+    .week-practice-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--gold);
+    }
+    .week-practice {
+      border-top: 1px solid var(--gold-line);
+      padding-top: 24px;
+      margin-top: 6px;
+      margin-bottom: 24px;
+    }
+    .week-practice-title {
+      font-family: var(--ff-ui);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
     .week-result {
       font-size: 13px;
       color: var(--gold);
@@ -1142,7 +1228,7 @@
     .week-result::before { content: '→ '; }
 
     @media (max-width: 900px) {
-      .program-grid { grid-template-columns: 1fr; }
+      .week-modules { grid-template-columns: 1fr; }
     }
 
     /* ────────────────────────────────────
@@ -1416,7 +1502,9 @@
       .hero-inner, .get-layout, .scheme-grid, .vsl-points { grid-template-columns: 1fr; gap: 48px; }
       .forwho-grid { grid-template-columns: 1fr; }
       .cases-grid { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
+      .hero-right { display: block; max-width: 360px; }
+      .hero-portrait-wrap { margin-left: 0; }
+      .hero-portrait-note { left: 16px; bottom: 16px; min-width: 0; right: 16px; }
       .get-sticky { position: static; }
       nav { padding: 16px 20px; }
       .container { padding: 0 20px; }
@@ -1441,19 +1529,19 @@
   <div class="hero-inner">
     <div class="hero-left">
       <div class="hero-tag">
-        <span>4 недели · тестовый заказ уже на 1-й неделе</span>
+        <span>4 недели · от первого заказа до результата в прибыли</span>
       </div>
       <h1 class="hero-h1">
-        Пройди первый заказ из Китая<br>
-        и на одном хорошем объекте<br>
-        <em>либо сэкономь, либо заработай</em>
+        Зарабатывай дополнительные 200–500 тыс. ₽<br>
+        на закупках из Китая<br>
+        <em>в рабочих проектах</em>
       </h1>
 
       <p class="hero-sub">
         Практический 4-недельный курс для дизайнеров, хоумстейджеров, флипперов,
         строителей и тех, кто делает ремонт для себя. Уже на первой неделе ты выбираешь
-        небольшой тестовый заказ, а дальше проходишь весь путь: поиск товара, поставщик,
-        согласование, проверка, логистика и итоговая экономика объекта.
+        небольшой тестовый заказ, а дальше проходишь путь от первого заказа до результата
+        в прибыли на рабочем проекте: поиск товара, просчёт, поставщик, проверка и логистика.
       </p>
 
       <div class="hero-author">
@@ -1463,21 +1551,16 @@
         </p>
       </div>
 
-      <a href="#pricing" class="btn-primary">Выбрать формат и пройти первый заказ</a>
+      <a href="#pricing" class="btn-primary">Выбрать формат и выйти в прибыль</a>
     </div>
 
     <div class="hero-right">
-      <div class="stat-card">
-        <div class="stat-num">470 000 ₽</div>
-        <p class="stat-desc"><strong>Дизайнер-ученица</strong> — заработок на комплектации с одного объекта. Только на поставке, без учёта гонорара за проект</p>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">422 000 ₽</div>
-        <p class="stat-desc"><strong>Барбершоп</strong> — сэкономил на оборудовании, купив напрямую то, что в России стоит втрое дороже</p>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">7–9 млн</div>
-        <p class="stat-desc"><strong>Подрядчик</strong> — вышел на контракты с нефтяной компанией, потому что умел закупать сам без посредников</p>
+      <div class="hero-portrait-wrap">
+        <img class="hero-portrait" src="marina.jpg" alt="Марина Кананцева" />
+        <div class="hero-portrait-note">
+          <strong>Марина Кананцева</strong>
+          <span>20+ лет в бизнесе с Китаем и прямых поставках</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1540,7 +1623,7 @@
   <div class="container">
     <div class="cases-header fade-up">
       <div class="section-label label">Реальные цифры</div>
-      <h2 class="cases-title">Здесь деньги и экономия не когда-нибудь, а уже на первом хорошем объекте</h2>
+      <h2 class="cases-title">Здесь деньги и экономия появляются не когда-нибудь, а уже на рабочем проекте</h2>
     </div>
     <div class="cases-grid">
       <div class="case-card">
@@ -1559,7 +1642,7 @@
         <p class="case-text">Барбершоп купил напрямую <strong>то, что в России стоит втрое дороже</strong>. Закупка сделана одним человеком без логиста, без агента и без знания китайского.</p>
       </div>
     </div>
-    <p class="cases-footnote">Смысл программы не в абстрактной "монетизации потом". Задача курса — пройти один полный цикл так, чтобы на хорошем заказе ты уже увидел либо свою экономию, либо свои деньги.</p>
+    <p class="cases-footnote">Смысл программы не в абстрактной "монетизации потом". Задача курса — пройти один полный цикл так, чтобы на рабочем проекте ты уже увидел либо свою экономию, либо свои деньги.</p>
   </div>
 </section>
 
@@ -1640,7 +1723,7 @@
           <div class="get-num">06</div>
           <div class="get-body">
             <strong>Схема денег: либо заработать, либо сократить бюджет</strong>
-            <p>Разбираем комплектацию, агентскую комиссию, ресейл и повторяемую экономию на собственных объектах. Смысл в том, чтобы первый хороший заказ уже дал результат.</p>
+            <p>Разбираем комплектацию, агентскую комиссию, ресейл и повторяемую экономию на собственных объектах. Смысл в том, чтобы рабочий проект уже дал результат в прибыли или экономии.</p>
           </div>
         </div>
       </div>
@@ -1655,52 +1738,157 @@
   <div class="container">
     <div class="program-header fade-up">
       <div class="section-label label">Программа</div>
-      <h2 class="program-title">4 недели — от первого тестового заказа до одного хорошего заказа</h2>
-      <p class="program-sub">Задача первой недели — выбрать и собрать небольшой тестовый заказ. Задача всей программы — пройти весь путь так, чтобы уже на одном хорошем заказе увидеть либо свою экономию, либо свои деньги.</p>
+      <h2 class="program-title">4 недели — от первого заказа до результата в прибыли</h2>
+      <p class="program-sub">Задача первой недели — выбрать и собрать небольшой тестовый заказ. Дальше ты проходишь весь путь на рабочем проекте: поиск, просчёт, поставщик, логистика и итоговые деньги.</p>
     </div>
     <div class="program-grid">
       <div class="week-card">
         <div class="week-num">Неделя 1</div>
-        <div class="week-title">Сценарий старта и тестовый заказ</div>
-        <ul class="week-items">
-          <li>Выбираешь свой маршрут: клиент, флип, хоумстейджинг, стройка или ремонт для себя</li>
-          <li>Собираешь бриф по объекту, сегменту и бюджету</li>
-          <li>Определяешь ключевые позиции и комфортную сумму входа</li>
-          <li>Выбираешь первый небольшой тестовый заказ, чтобы перестать откладывать старт</li>
-        </ul>
+        <div class="week-title">Вход в рынок и роль закупки в рабочем проекте</div>
+        <p class="week-goal"><strong>Цель недели:</strong> убрать хаос, показать место Китая в современном интерьерном рынке, выбрать понятный сценарий старта и выйти на решение по первому небольшому тестовому заказу.</p>
+        <div class="week-modules">
+          <div class="week-module">
+            <div class="week-module-name">Модуль 1</div>
+            <div class="week-module-title">Китай как рабочий инструмент дизайнера</div>
+            <ul class="week-lessons">
+              <li>Как изменился интерьерный рынок и почему Китай стал базовым источником мебели, света, декора и отделки</li>
+              <li>Где дизайнер зарабатывает на комплектации, а где теряет деньги в пользу магазинов и посредников</li>
+              <li>Роли: дизайнер, комплектатор, закупочный агент, студия, подрядчик</li>
+              <li>3 сценария старта: для своего проекта, для клиентского проекта, как отдельная услуга</li>
+            </ul>
+          </div>
+          <div class="week-module">
+            <div class="week-module-name">Модуль 2</div>
+            <div class="week-module-title">Тренды, сегменты и карта закупки</div>
+            <ul class="week-lessons">
+              <li>Как отслеживать тренды и не предлагать клиенту устаревшие решения</li>
+              <li>Сегментация рынка: эконом, middle, premium</li>
+              <li>Как сопоставлять визуализацию, бюджет и китайский ассортимент</li>
+              <li>С каких категорий безопаснее начинать: свет, декор, корпусная мебель, мягкая мебель, сантехника, отделка</li>
+            </ul>
+          </div>
+        </div>
+        <div class="week-practice">
+          <div class="week-practice-title">Практика недели</div>
+          <ul class="week-practice-list">
+            <li>Выбрать один сценарий старта</li>
+            <li>Собрать бриф по своему или учебному объекту</li>
+            <li>Определить 15–30 позиций для первой подборки</li>
+            <li>Зафиксировать бюджет, сроки и желаемый сегмент проекта</li>
+            <li>Выбрать позицию или небольшую группу позиций для первого тестового заказа на комфортную сумму</li>
+          </ul>
+        </div>
         <div class="week-result">Есть объект, список позиций и выбран первый тестовый заказ</div>
       </div>
       <div class="week-card">
         <div class="week-num">Неделя 2</div>
-        <div class="week-title">Поиск товара, поставщики и расчёт выгоды</div>
-        <ul class="week-items">
-          <li>Разбираешь 1688, Taobao, Pinduoduo и логику поиска по фото, аналогам и категориям</li>
-          <li>Сравниваешь поставщиков по цене, материалам, срокам и условиям</li>
-          <li>Учишься писать поставщику, запрашивать фото, видео, наличие и образцы</li>
-          <li>Делаешь первый просчёт, смету или мини-КП по своему объекту</li>
-        </ul>
+        <div class="week-title">Поиск товара, поставщиков и расчёт выгоды</div>
+        <p class="week-goal"><strong>Цель недели:</strong> научиться искать товар на китайских площадках и превращать подбор в понятное предложение для заказчика или в понятную экономику своего рабочего проекта.</p>
+        <div class="week-modules">
+          <div class="week-module">
+            <div class="week-module-name">Модуль 3</div>
+            <div class="week-module-title">Китайские площадки для дизайнера</div>
+            <ul class="week-lessons">
+              <li>1688, Taobao, Pinduoduo и дополнительные источники</li>
+              <li>Как искать по фото, аналогам, фабрикам и категориям</li>
+              <li>Как отличать фабрику, торговую компанию и посредника</li>
+              <li>Как читать карточку товара: материалы, размеры, MOQ, сроки, отзывы, рейтинг</li>
+            </ul>
+          </div>
+          <div class="week-module">
+            <div class="week-module-name">Модуль 4</div>
+            <div class="week-module-title">Поставщик, переписка и unit-экономика</div>
+            <ul class="week-lessons">
+              <li>Шаблоны переписки с поставщиком</li>
+              <li>Как запрашивать фото, видео, образцы, уточнение материалов и наличия</li>
+              <li>Как считать итоговую стоимость для клиента: товар, логистика по Китаю, инспекция, упаковка, доставка, комиссия</li>
+              <li>Как показать клиенту не “дешевле”, а “выгоднее и обоснованно”</li>
+            </ul>
+          </div>
+        </div>
+        <div class="week-practice">
+          <div class="week-practice-title">Практика недели</div>
+          <ul class="week-practice-list">
+            <li>Найти не менее 3 вариантов по 5 ключевым позициям</li>
+            <li>Собрать сравнительную таблицу по цене, материалам, срокам и рискам</li>
+            <li>Сделать предварительный просчёт 3–5 позиций с доставкой</li>
+            <li>Подготовить мини-КП или смету для клиента</li>
+          </ul>
+        </div>
         <div class="week-result">Есть shortlist поставщиков и расчёт, который можно показать клиенту или проверить на своём объекте</div>
       </div>
       <div class="week-card">
         <div class="week-num">Неделя 3</div>
-        <div class="week-title">Комплектация, проверка и логистика</div>
-        <ul class="week-items">
-          <li>Собираешь таблицу комплектации и порядок согласования по позициям</li>
-          <li>Учишься фиксировать условия, чтобы снизить риск брака, пересорта и потери денег</li>
-          <li>Разбираешь инспекцию, упаковку, карго и основы белой доставки</li>
-          <li>Собираешь чек-лист контроля: оплата, консолидация, отправка, приёмка</li>
-        </ul>
+        <div class="week-title">Комплектация, заказ, проверка и доставка</div>
+        <p class="week-goal"><strong>Цель недели:</strong> провести участника через реальную механику закупки, чтобы страх ушёл после первого собранного цикла и появился управляемый процесс под рабочий проект.</p>
+        <div class="week-modules">
+          <div class="week-module">
+            <div class="week-module-name">Модуль 5</div>
+            <div class="week-module-title">Работа с клиентом и сборка заказа</div>
+            <ul class="week-lessons">
+              <li>Как вести чат с клиентом и согласовывать позиции без хаоса</li>
+              <li>Таблица комплектации: ссылки, цены, сроки, статус согласования</li>
+              <li>Когда подписывать договор и как фиксировать рамки ответственности</li>
+              <li>Как собирать заказ партиями и управлять ожиданиями по срокам</li>
+            </ul>
+          </div>
+          <div class="week-module">
+            <div class="week-module-name">Модуль 6</div>
+            <div class="week-module-title">Инспекция, упаковка, карго и белая доставка</div>
+            <ul class="week-lessons">
+              <li>Когда нужна инспекция от фабрики, а когда на складе</li>
+              <li>Как снизить риск брака, пересорта и ошибок по цвету или размеру</li>
+              <li>Карго vs белая доставка: что выбирать дизайнеру или подрядчику на старте</li>
+              <li>Сроки, страховка, консолидация, приёмка груза в РФ</li>
+            </ul>
+          </div>
+        </div>
+        <div class="week-practice">
+          <div class="week-practice-title">Практика недели</div>
+          <ul class="week-practice-list">
+            <li>Собрать тестовый заказ или учебный заказ по реальному объекту</li>
+            <li>Заполнить таблицу комплектации и статусы по каждой позиции</li>
+            <li>Выбрать схему доставки и просчитать сроки</li>
+            <li>Подготовить чек-лист контроля: оплата, инспекция, упаковка, отправка, приёмка</li>
+          </ul>
+        </div>
         <div class="week-result">Заказ собран, защищён и понятен весь путь до получения</div>
       </div>
       <div class="week-card">
         <div class="week-num">Неделя 4</div>
-        <div class="week-title">Один хороший заказ: деньги и масштаб</div>
-        <ul class="week-items">
-          <li>Считаешь, где именно твои деньги: комплектация, агентская комиссия, ресейл или экономия на своём объекте</li>
-          <li>Упаковываешь услугу, коммерческое предложение или сценарий для следующего проекта</li>
-          <li>Разбираешь, как превращать первый кейс в повторяемую систему</li>
-          <li>Собираешь план на один хороший заказ, который должен дать первый ощутимый результат</li>
-        </ul>
+        <div class="week-title">Рабочий проект: прибыль и масштаб</div>
+        <p class="week-goal"><strong>Цель недели:</strong> превратить навык закупки в отдельный источник дохода или в повторяемый инструмент экономии, а не оставить его на уровне “я теперь просто умею искать”.</p>
+        <div class="week-modules">
+          <div class="week-module">
+            <div class="week-module-name">Модуль 7</div>
+            <div class="week-module-title">Как дизайнеру зарабатывать на закупках</div>
+            <ul class="week-lessons">
+              <li>3 модели монетизации: агентская комиссия, ресейл, комплектация под ключ</li>
+              <li>Как считать свою маржу экологично для клиента и выгодно для себя</li>
+              <li>Как упаковать услугу: комплектация, сопровождение закупки, подбор и поставка</li>
+              <li>Где проходит граница между дизайнерским гонораром и закупочной комиссией</li>
+            </ul>
+          </div>
+          <div class="week-module">
+            <div class="week-module-name">Модуль 8</div>
+            <div class="week-module-title">Поиск клиентов и коммерческое предложение</div>
+            <ul class="week-lessons">
+              <li>Психология клиента: бюджет, страхи, доверие, ответственность</li>
+              <li>Как объяснять выгоду без образа “перекупщика”</li>
+              <li>Где брать первых клиентов: свои проекты, студии, подрядчики, архитекторы, сарафан, Telegram, Instagram, партнёрства</li>
+              <li>Как собрать коммерческое предложение и кейс под первую продажу</li>
+            </ul>
+          </div>
+        </div>
+        <div class="week-practice">
+          <div class="week-practice-title">Практика недели</div>
+          <ul class="week-practice-list">
+            <li>Оформить своё предложение как услуги</li>
+            <li>Собрать коммерческое предложение или презентацию</li>
+            <li>Подготовить оффер для 3 типов клиентов: частный заказчик, дизайн-студия, подрядчик</li>
+            <li>Составить план действий на ближайшие 30 дней по поиску первых клиентов</li>
+          </ul>
+        </div>
         <div class="week-result">Есть схема, на которой можно либо экономить, либо зарабатывать на следующих объектах</div>
       </div>
     </div>
@@ -1713,8 +1901,8 @@
 <section id="result">
   <div class="container result-inner fade-up">
     <div class="result-tag label">Результат</div>
-    <div class="result-big">1 хороший заказ</div>
-    <div class="result-label">может окупить программу экономией или прибылью</div>
+    <div class="result-big">200–500 тыс. ₽</div>
+    <div class="result-label">дополнительно на закупках из Китая в рабочем проекте</div>
     <p class="result-text">
       Для дизайнера это может быть маржа на комплектации. Для флиппера, строителя или подрядчика —
       улучшенная экономика объекта. Для тех, кто делает ремонт для себя, — разница между шоурумом
@@ -1761,7 +1949,7 @@
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
-          <p>Нет. Программа подходит дизайнерам, хоумстейджерам, флипперам, строителям, подрядчикам и тем, кто делает ремонт для себя. Логика везде одна: выбрать позиции, просчитать выгоду, пройти заказ, получить товар и уже на хорошем объекте увидеть либо экономию, либо деньги.</p>
+          <p>Нет. Программа подходит дизайнерам, хоумстейджерам, флипперам, строителям, подрядчикам и тем, кто делает ремонт для себя. Логика везде одна: выбрать позиции, просчитать выгоду, пройти заказ, получить товар и уже на рабочем проекте увидеть либо экономию, либо деньги.</p>
         </div>
       </div>
       <div class="faq-item">
@@ -1839,7 +2027,7 @@
     <div class="pricing-header fade-up">
       <div class="section-label label">Тарифы</div>
       <h2 class="pricing-title">Выбери формат под свою задачу</h2>
-      <p class="pricing-sub">Во всех тарифах одна и та же 4-недельная программа: на первой неделе ты выбираешь небольшой тестовый заказ, к концу проходишь полный путь и собираешь схему для одного хорошего заказа. Отличие только в глубине сопровождения.</p>
+      <p class="pricing-sub">Во всех тарифах одна и та же 4-недельная программа: на первой неделе ты выбираешь небольшой тестовый заказ, а к концу проходишь полный путь и собираешь схему результата в прибыли на рабочем проекте. Отличие только в глубине сопровождения.</p>
     </div>
     <div class="pricing-grid">
 
@@ -1855,7 +2043,7 @@
         <div class="price-divider"></div>
         <ul class="price-features">
           <li>Полная 4-недельная программа</li>
-          <li>8 модулей: от сценария старта до одного хорошего заказа</li>
+          <li>8 модулей: от сценария старта до результата в прибыли</li>
           <li>Сценарии под клиента, флип, хоумстейджинг, стройку и ремонт для себя</li>
           <li>Бриф, таблица комплектации и шаблон первого просчёта</li>
           <li>Закрытая база 500+ поставщиков</li>
@@ -1885,7 +2073,7 @@
           <li>Закрытая база 500+ поставщиков</li>
           <li>Разбор поставщика, цен, переписки, проверки и логистики</li>
           <li>Куратор помогает пройти тестовый заказ на комфортную сумму</li>
-          <li>Сопровождение первой реальной сделки или хорошего клиентского заказа</li>
+          <li>Сопровождение первого реального рабочего проекта</li>
           <li>Помощь с просчётом, комплектацией и вопросами по ходу</li>
           <li>Блок по заработку, упаковке услуги и поиску клиентов</li>
           <li>Куратор и обратная связь на всём пути</li>
@@ -1931,8 +2119,8 @@
 <section id="cta">
   <div class="container cta-inner fade-up">
     <div class="section-label label" style="margin-bottom:24px">Начать</div>
-    <h2 class="cta-title">Выбери формат и пройди<br><em>первый заказ</em> до результата</h2>
-    <p class="cta-sub">Если тебе нужна не просто информация, а понятный маршрут с задачей заработать или сэкономить уже на одном хорошем заказе, начни с этой программы.</p>
+    <h2 class="cta-title">Выбери формат и пройди<br><em>первый заказ</em> до результата в прибыли</h2>
+    <p class="cta-sub">Если тебе нужна не просто информация, а понятный маршрут с задачей заработать или сэкономить уже на рабочем проекте, начни с этой программы.</p>
     <a href="#" class="btn-primary" onclick="openOrderForm(this);return false;">Оставить заявку</a>
     <p class="cta-note">Марина Кананцева · 20 лет в бизнесе с Китаем · Член ОПОРА России</p>
   </div>
@@ -1995,7 +2183,7 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll(
-    '.stat-card, .forwho-card, .case-card, .get-item, .scheme-card, .week-card, .price-card, .step, .faq-item, .platform-card, .fade-up, .author-photo-wrap, .author-content'
+    '.hero-portrait-wrap, .forwho-card, .case-card, .get-item, .scheme-card, .week-card, .price-card, .step, .faq-item, .platform-card, .fade-up, .author-photo-wrap, .author-content'
   ).forEach(el => observer.observe(el));
 
   // ORDER MODAL
@@ -2058,13 +2246,6 @@
       if (!isOpen) item.classList.add('open');
     });
   });
-
-  // Hero stat cards — staggered entrance on load
-  setTimeout(() => {
-    document.querySelectorAll('.stat-card').forEach((c, i) => {
-      setTimeout(() => c.classList.add('visible'), 300 + i * 120);
-    });
-  }, 200);
 </script>
 </body>
 </html>
